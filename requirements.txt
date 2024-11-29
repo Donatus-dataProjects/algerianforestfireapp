@@ -3,6 +3,7 @@ pandas
 numpy 
 matplotlib
 ipykernel
-flask
 seaborn
 memory_profiler
+streamlit
+streamlit_option_menu
