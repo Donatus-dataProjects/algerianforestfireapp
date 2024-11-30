@@ -12,25 +12,41 @@ standard_scaler = pickle.load(open('models/scaler.sav', 'rb'))
 def main():
     st.title("Forest Fire Prediction")
 
-    st.header("Input the required values:")
+#Styling my
+    st.markdown("<h2 style='color: red; font-size: 16px;'>Input the required values:</h2>", unsafe_allow_html=True)
 
-    # Collecting user input values      
-    Temperature = st.number_input("Temperature", min_value=-100.0, max_value=100.0, value=None, format="%.2f")
-    RH = st.number_input("Relative Humidity (RH)", min_value=0.0, max_value=100.0, value=None, format="%.2f")
-    Ws = st.number_input("Wind Speed (Ws)", min_value=0.0, value=None, format="%.2f")
-    Rain = st.number_input("Rain", min_value=0.0, value=None, format="%.2f")
-    FFMC = st.number_input("FFMC", min_value=0.0, value=None, format="%.2f")
-    DMC = st.number_input("DMC", min_value=0.0, value=None, format="%.2f")
-    ISI = st.number_input("ISI", min_value=0.0, value=None, format="%.2f")
-    #Classes = st.number_input("Classes", min_value=0, max_value=100, value=None)
-    #Region = st.number_input("Region", min_value=0, max_value=100, value=None)
-    Classes = st.selectbox("Classes (Select 0 or 1)", options=[0, 1])
-    Region = st.selectbox("Region (Select 0 or 1)", options=[0, 1])
-
+    # Collecting user input values from end user
+    #Creating columns
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        Temperature = st.number_input("Temperature", min_value=-100.0, max_value=100.0, value=None, format="%.2f")
+    
+    with col2:
+        RH = st.number_input("Relative Humidity", min_value=0.0, max_value=100.0, value=None, format="%.2f")
+    
+    with col3:
+        Ws = st.number_input("Wind Speed", min_value=0.0, value=None, format="%.2f")
+    
+    with col1:
+        Rain = st.number_input("Rain", min_value=0.0, value=None, format="%.2f")
+    
+    with col2:
+        FFMC = st.number_input("Fine Fuel Moisture Code", min_value=0.0, value=None, format="%.2f")
+    
+    with col3:
+        DMC = st.number_input("Duff Moisture Code", min_value=0.0, value=None, format="%.2f")
+    
+    with col1:
+        ISI = st.number_input("Initial Spread Index", min_value=0.0, value=None, format="%.2f")
+    
+    with col2:
+        Classes = st.selectbox("Classes (Select 0 or 1)", options=[0, 1])
+    
+    with col3:
+        Region = st.selectbox("Region (Select 0 or 1)", options=[0, 1])
 
     # When user clicks "Predict"
-    # When user clicks "Predict"
-    if st.button("Predict"):
+    if st.button("Fire Weather Index"):
         if None in [Temperature, RH, Ws, Rain, FFMC, DMC, ISI, Classes, Region]:
             st.error("Please fill in all fields before predicting.")
         else:
